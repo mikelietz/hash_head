@@ -20,7 +20,7 @@ class HashHead extends Plugin {
 	public static function configure()
 	{
 		$form = new FormUI( "hash_head" );
-		$form->append( new FormControlSelect( 'type', 'hashhead__path', _t( 'Hash to show', 'hash_head' ), array( '/' => "Habari root", '/system/' => "Habari /system" ) ) );
+		$form->append( new FormControlSelect( 'type', 'hashhead__path', _t( 'Hash to show', 'hash_head' ), array( '/system/' => "Habari /system", '/' => "Habari root" ) ) );
 		$form->append( new FormControlSubmit( 'save', _t( 'Save', 'hash_head' ) ) );
 		return $form;
 	}
@@ -51,7 +51,7 @@ class HashHead extends Plugin {
 	public static function get_git_short_hash()
 	{
 		$rev = '';
-		$ref_file = HABARI_PATH .'/system/.git/HEAD';
+		$ref_file = HABARI_PATH . Options::get( 'hashhead__path', '/system/' ) . '.git/HEAD';
 		if ( file_exists( $ref_file ) ) {
 			$info = file_get_contents( $ref_file );
 			// If the contents of this file start with "ref: ", it means we need to look where it tells us for the hash.
@@ -61,7 +61,7 @@ class HashHead extends Plugin {
 			}
 			else {
 				preg_match( '/ref: (.*)/', $info, $match );
-				$rev = substr( file_get_contents( HABARI_PATH . Options::get( 'hashhead__path', '/system' ) . '.git/' . $match[1] ), 0, 7 );
+				$rev = substr( file_get_contents( HABARI_PATH . Options::get( 'hashhead__path', '/system/' ) . '.git/' . $match[1] ), 0, 7 );
 			}
 		}
 		return $rev;
