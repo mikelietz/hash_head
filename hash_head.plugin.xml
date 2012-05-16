@@ -8,5 +8,5 @@
 	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
 	<copyright>2012</copyright>
 	<guid>8f74783e-1282-4cf4-90f3-3a193ce2e051</guid>
-	<help><value><![CDATA[Once configured, hash metadata will be added to your headers as long as your theme calls <code>&lt;?php $theme->header(); ?&gt;</code>.]]></value></help>
+	<help><value><![CDATA[Once configured, hash metadata will be added to your headers as long as your theme echoes <code>&lt;?php echo $theme->header(); ?&gt;</code>.]]></value></help>
 </pluggable>
